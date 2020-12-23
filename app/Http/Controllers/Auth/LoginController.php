@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
@@ -49,6 +50,7 @@ class LoginController extends Controller
 
     public function socialRedirect($social)
     {
+
         $user = Socialite::driver($social)->user();
 
         $name = $user->name ?? $name = $user->nickname;

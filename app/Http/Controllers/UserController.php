@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\Activity;
 
 class UserController extends Controller
 {
@@ -28,6 +29,10 @@ class UserController extends Controller
 
     public function follow($id)
     {
+        $type = 'follow';
+        $target = $id;
+        Activity::addActivity($type, $target);
+
         DB::table('followships')->insert(['follower_id'=>Auth::user()->id,'followed_id'=>$id]);
         
         return back();
@@ -35,8 +40,19 @@ class UserController extends Controller
 
     public function unfollow($id)
     {
+        $type = 'unfollow';
+        $target = $id;
+        Activity::addActivity($type, $target);
+
         DB::table('followships')->where(['follower_id'=>Auth::user()->id,'followed_id'=>$id])->delete();
         
         return back();
+    }
+
+    public function activity()
+    {
+        $activities = DB::table('activities')->where('user_id',Auth::user()->id)->orderBy('created_at','desc')->get();
+
+        return view('user.activity')->with(compact('activities'));
     }
 }

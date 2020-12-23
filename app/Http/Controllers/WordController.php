@@ -31,6 +31,14 @@ class WordController extends Controller
 
         $data = $request->all();
 
+        if(empty($data['course_id'])){
+            $data['course_id'] = 'all';
+        }
+
+        if (empty($data['value'])) {
+            $data['value'] = 'all';
+        }
+
         $course_selected = $data['course_id'];
         $valueChoose = $data['value'];
 
@@ -38,7 +46,7 @@ class WordController extends Controller
         $wordStatus = $user->words;
 
         if( $data['course_id'] == 'all' ){
-            $words = Word::get();    
+            $words = Word::get();
         }else{
             $words = Word::where('course_id', $data['course_id'])->get();
         }

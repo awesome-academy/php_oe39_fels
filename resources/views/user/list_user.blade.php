@@ -10,7 +10,7 @@
                     <div class="follow-user">
                         <img src="{{ asset('img/user/user-1.jpg') }}" alt="" class="profile-photo-sm pull-left" />
                         <div>
-                        <h5><a href="timeline.html">{{ $user->name }}</a></h5>
+                        <h5><a href="">{{ $user->name }}</a></h5>
                         <p>Email: {{ $user->email }}</p>
                         <p>123 @lang('user.word_learned')</p>
                         @if($user->id != Auth::user()->id)

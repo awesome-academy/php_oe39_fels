@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Helpers\Activity;
+
 
 class ProfileController extends Controller
 {
@@ -44,6 +47,10 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
+        $type = 'edit profile';
+        $target = $id;
+        Activity::addActivity($type, $target);
+
         $profile = $this->user->findOrFail($id)->profile;
 
         return view('user.edit_profile', compact('profile'));

@@ -11,7 +11,6 @@
         <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.html">{{ $following->count() }} @lang('user.followings')</a></div></li>
         <li><i class="icon ion-chatboxes"></i><div><a href="newsfeed-messages.html">1000 @lang('user.word_learned')</a></div></li>
         <li><i class="icon ion-chatboxes"></i><div><a href="{{route('profile.index')}}">@lang('user.profiles')</a></div></li>
-    <li><i class="icon ion-chatboxes"></i><div><a href="{{route('profile.index')}}">@lang('user.profiles')</a></div></li>
     </ul><!--news-feed links ends-->
     <div id="chat-block">
         <div class="title">@lang('user.course_started')</div>

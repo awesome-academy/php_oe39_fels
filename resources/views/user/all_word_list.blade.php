@@ -49,11 +49,11 @@
         <th scope="row">{{ $i }}</th>
         <td>{{ $word->text }}</td>
         <td>{{ $word->course->name }}</td>
-        @foreach ($wordStatus as $stt)
-            @if($stt->pivot->word_id == $word->id)
-                <td>@lang('user.word_learned')</td>
-            @endif
-        @endforeach
+        @if(isLearned($word->id)=='learned')
+            <td><span class="label label-success">@lang('user.word_learned')</span></td>
+        @else
+            <td><span class="label label-default">@lang('user.unlearned')</span></td>
+        @endif
         </tr>
         <?php $i++; ?>
         @endforeach

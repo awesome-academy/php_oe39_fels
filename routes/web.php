@@ -38,10 +38,10 @@ Route::group(['middleware' => 'localization'], function () {
     
     Route::get('change-language/{language}', 'ChangeLanguageController@changeLanguage')->name('change-language');
 
-    Route::get('/profile/{id}', 'UserController@profile')->name('user.profile');
     Route::get('/all-user', 'UserController@allUser')->name('all-user');
     Route::get('/follow/{id}', 'UserController@follow')->name('follow');
     Route::get('/unfollow/{id}', 'UserController@unfollow')->name('unfollow');
+    Route::get('/activity', 'UserController@activity')->name('activity');
 
     Route::get('list-all-word','WordController@index')->name('list-all-word');
     Route::match(['get','post'], 'word-filter', 'WordController@filter')->name('word-filter');

@@ -43,19 +43,45 @@
     </thead>
     <tbody>
         <?php $i = 1; ?>
-        @foreach($words as $word)
-            <tr>
-            <th scope="row">{{ $i }}</th>
-            <td>{{ $word->text }}</td>
-            <td>{{ $word->course->name }}</td>
-            @foreach ($wordStatus as $stt)
-                @if($stt->pivot->word_id == $word->id)
-                    <td>@lang('user.word_learned')</td>
+        @if($valueChoose == 'all')
+            @foreach($words as $word)
+                <tr>
+                <th scope="row">{{ $i }}</th>
+                <td>{{ $word->text }}</td>
+                <td>{{ $word->course->name }}</td>
+                @if(isLearned($word->id)=='learned')
+                <td><span class="label label-success">@lang('user.word_learned')</span></td>
+                @else
+                    <td><span class="label label-default">@lang('user.unlearned')</span></td>
                 @endif
+                </tr>
+                <?php $i++; ?>
             @endforeach
-            </tr>
-            <?php $i++; ?>
-        @endforeach
+        @elseif($valueChoose == 'learned')
+            @foreach($words as $word)
+                @if(isLearned($word->id)=='learned')
+                <tr>
+                <th scope="row">{{ $i }}</th>
+                <td>{{ $word->text }}</td>
+                <td>{{ $word->course->name }}</td>
+                <td><span class="label label-success">@lang('user.word_learned')</span></td>
+                </tr>
+                <?php $i++; ?>
+                @endif
+            @endforeach 
+        @elseif($valueChoose == 'unlearned') 
+            @foreach($words as $word)
+                @if(isLearned($word->id)=='unlearned')
+                <tr>
+                <th scope="row">{{ $i }}</th>
+                <td>{{ $word->text }}</td>
+                <td>{{ $word->course->name }}</td>
+                <td><span class="label label-default">@lang('user.unlearned')</span></td>
+                </tr>
+                <?php $i++; ?>
+                @endif
+            @endforeach         
+        @endif
     </tbody>
     </table>
 </div>

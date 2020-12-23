@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Word::class, 'users_word', 'user_id', 'word_id')->withPivot('status');
     }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class,'user_id','id');
+    }
 }

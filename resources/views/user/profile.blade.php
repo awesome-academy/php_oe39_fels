@@ -3,14 +3,26 @@
 
     <div class="col-sm-8 col-md-7">
     <div class="thumbnail">
-    <img src="{{ asset('img/user/'.$user->profile->avatar) }}" alt="user">
+      @php
+      $avatar = isset($userss->profile->avatar) ? $userss->profile->avatar : '';
+      @endphp
+      <img src="{{ asset('img/user/'.$avatar) }}" alt="user" class="profile-photo" />
       <div class="caption">
         <h3>{{ $user->name }}</h3>
         <span class="label label-info">300 @lang('user.word_learned')</span>
         <span class="label label-primary">{{$follower->count()}} @lang('user.followers')</span>
         <span class="label label-success">{{$following->count()}} @lang('user.followings')</span>
         <p>Email: {{ $user->email }}</p>
-        <p><a href="{{route('profile.edit',$user->id)}}" class="btn btn-primary" role="button">@lang('user.edit_profile')</a> <a href="#" class="btn btn-default" role="button">Follow</a></p>
+        <p>
+        <a href="{{route('profile.edit',$user->id)}}" class="btn btn-primary" role="button">@lang('user.edit_profile')</a>
+        @if($user->id != Auth::user()->id)
+            @if(isFollowing($user->id)=='following')
+            <a type="button" href="{{ route('unfollow',$user->id) }}" class="btn btn-default">@lang('user.unfollow')</a>
+            @else
+            <a type="button" href="{{ route('follow',$user->id) }}" class="btn btn-success">@lang('user.follow')</a>
+            @endif
+        @endif
+        </p>
       </div>
       <p>@lang('user.course_progress'):</p>
       <div class="progress">

@@ -16,4 +16,9 @@ class Answer extends Model
     {
         return $this->belongsTo(Question::class, 'question_id', 'id');
     }
+
+    public function word()
+    {
+        return $this->belongsTo(Word::class, 'word_id', 'id');
+    }
 }

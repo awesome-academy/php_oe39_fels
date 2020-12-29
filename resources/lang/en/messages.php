@@ -14,6 +14,12 @@ return [
             'lesson' => 'All lessons',
             'start_lesson' => 'Start',
             'course_enroll' => 'Courses participated',
+            'all_words_learn' => 'All words',
+            'made_test' => 'Made Test ',
+            'title_test' => 'Test lesson: ',
+            'detail_course' => 'View Detail',
+            'view_result' => 'View Result',
+            'back_lesson' => 'Back to lesson',
         ],
     ],
 ];

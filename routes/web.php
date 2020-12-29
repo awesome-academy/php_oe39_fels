@@ -29,6 +29,12 @@ Route::group(['middleware' => 'localization'], function () {
         Route::get('/show/{course}', 'CourseController@show')->name('course.detail');
         Route::post('/enroll/{course}/course', 'CourseController@enroll')->name('courses.enroll');
         Route::post('/leave/{course}/course', 'CourseController@leave')->name('courses.leave');
+        Route::get('/word/{course}/course', 'CourseController@allWordCourse')->name('course.words');
+
+        Route::get('/show/{lesson}/lesson', 'LessonController@show')->name('lesson.detail');
+        Route::get('/test/{lesson}/lesson', 'LessonController@test')->name('lesson.test');
+        Route::post('/save-test/{lesson}/lesson', 'LessonController@handleTest')->name('lesson.handle.test');
+        Route::get('/result/{lesson}/lesson', 'LessonController@result')->name('lesson.result.test');
     });
     Route::get('/', function () {
         return view('welcome');

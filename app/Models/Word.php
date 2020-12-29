@@ -21,4 +21,9 @@ class Word extends Model
     {
         return $this->belongsToMany(User::class, 'users_word', 'word_id', 'user_id');
     }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class, 'word_id', 'id');
+    }
 }

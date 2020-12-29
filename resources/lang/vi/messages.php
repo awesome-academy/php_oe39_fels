@@ -14,6 +14,12 @@ return [
             'lesson' => 'Tất cả bài học',
             'start_lesson' => 'Bắt đầu',
             'course_enroll' => 'Các khóa học đã tham gia',
+            'all_words_learn' => 'Tất cả các từ cần học ',
+            'made_test' => 'Làm bài kiểm tra ',
+            'title_test' => 'Kiểm tra bài học: ',
+            'detail_course' => 'Xem chi tiết',
+            'view_result' => 'Xem kết quả',
+            'back_lesson' => 'Quay lại bài học',
         ],
     ],
 ];

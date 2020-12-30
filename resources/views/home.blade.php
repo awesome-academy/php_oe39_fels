@@ -20,7 +20,7 @@
                                 </h4>                              
                                 <p>
                                     @if ($course->isEnrolled)
-                                    <span class="badge badge-danger">
+                                    <span class="badge badge-info">
                                         @lang('messages.front_end.profile.enrolled')
                                     </span>
                                     @endif
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ route('course.detail', ['course' => $course]) }}" class="btn btn-primary">Xem chi tiet</a>
+                        <a href="{{ route('course.detail', ['course' => $course]) }}" class="btn btn-primary">@lang('messages.front_end.profile.detail_course')</a>
                     </div>
                 </div>                
             </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="reaction">
                 <a href="{{ route('course.detail', $course->id) }}" class="btn btn-success">@lang('user.open_sourse')</a>
-                <a class="btn btn-info"> @lang('user.all_word_list')</a>
+                <a href="{{ route('course.words', ['course' => $course]) }}" class="btn btn-info"> @lang('user.all_word_list')</a>
             </div>
             <div class="line-divider"></div>
             <div class="post-text">

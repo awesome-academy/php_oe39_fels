@@ -6,19 +6,19 @@
     @if (session()->has('success'))
         <div class="alert alert-success">{{ session()->get('success') }}</div>
     @endif
-    <form action="{{ route('profile.update',$profile->user->id) }}" class="contact-form" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('profile.update',$profile->id) }}" class="contact-form" method="POST" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
         <div class="form-group">
             <label>@lang('user.name')</label>
-            <input id="contact-name" value="{{$profile->user->name}}" type="text" name="name" class="form-control" placeholder="@lang('messages.front_end.profile.enter_name')" required="required">
+            <input id="contact-name" value="{{$profile->name}}" type="text" name="name" class="form-control" placeholder="@lang('messages.front_end.profile.enter_name')" required="required">
         </div>
         @error('name')
             {{ $message }}
         @enderror
         <div class="form-group">
             <label>@lang('user.email')</label>
-            <input id="contact-email" value="{{$profile->user->email}}" type="text" name="email" class="form-control" disabled>
+            <input id="contact-email" value="{{$profile->email}}" type="text" name="email" class="form-control" disabled>
         </div>
         <div class="form-group">
             <label>@lang('user.gender')</label>

@@ -4,7 +4,7 @@
             $avatar = isset($userss->profile->avatar) ? $userss->profile->avatar : '';
         @endphp
         <img src="{{ asset('img/user/'.$avatar) }}" alt="user" class="profile-photo" />
-        <h5><a href="{{route('profile.index')}}" class="text-white">{{ Auth::user()->name }}</a></h5>
+        <h5><a href="{{route('user.profile', Auth::user()->id)}}" class="text-white">{{ Auth::user()->name }}</a></h5>
         <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> {{ $follower->count() }} @lang('user.followers')</a>
     </div><!--profile card ends-->
     <ul class="nav-news-feed">

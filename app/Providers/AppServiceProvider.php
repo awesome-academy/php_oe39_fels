@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(
+            \App\Repositories\User\Profile\ProfileRepositoryInterface::class,
+            \App\Repositories\User\Profile\ProfileRepository::class,
+        );
     }
 
     /**

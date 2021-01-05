@@ -6,11 +6,27 @@ use Illuminate\Http\Request;
 use App\Models\Word;
 use App\Models\Course;
 use App\Models\User;
+use App\Repositories\User\Course\CourseRepositoryInterface;
+use App\Repositories\User\Profile\ProfileRepositoryInterface;
+use App\Repositories\User\Word\WordRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class WordController extends Controller
 {
+    protected $courseRepo;
+    protected $userRepo;
+    protected $wordRepo;
+
+    public function __construct(
+        CourseRepositoryInterface $courseRepo,
+        ProfileRepositoryInterface $userRepo,
+        WordRepositoryInterface $wordRepo
+    ) {
+        $this->courseRepo = $courseRepo;
+        $this->userRepo = $userRepo;
+        $this->wordRepo = $wordRepo;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,29 +34,27 @@ class WordController extends Controller
      */
     public function index()
     {
-        $user = User::where('id', Auth::user()->id)->first();
-        $wordStatus = $user->words;
-        $words = Word::get();
-        $listCategorys = Course::get();
+        $wordStatus = $this->userRepo->wordStatusUser();
+        $words = $this->wordRepo->getAll();
+        $listCategorys = $this->courseRepo->getAll();
         return view('user.all_word_list')->with(compact('words', 'listCategorys', 'wordStatus'));
     }
 
     public function filter(Request $request)
     {
-        $listCategorys = Course::get();
+        $listCategorys = $this->courseRepo->getAll();
 
         $data = $request->all();
 
         $course_selected = $data['course_id'];
         $valueChoose = $data['value'];
 
-        $user = User::where('id',Auth::user()->id)->first();
-        $wordStatus = $user->words;
+        $wordStatus = $this->userRepo->wordStatusUser();
 
         if( $data['course_id'] == 'all' ){
-            $words = Word::get();    
+            $words = $this->wordRepo->getAll();
         }else{
-            $words = Word::where('course_id', $data['course_id'])->get();
+            $words = $this->wordRepo->filterWordbyCourse($data['course_id']);
         }
         return view('user.listing')->with(compact('words', 'listCategorys', 'course_selected', 'wordStatus', 'valueChoose'));
     }

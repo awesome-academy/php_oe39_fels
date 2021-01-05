@@ -7,5 +7,6 @@ interface ProfileRepositoryInterface {
     public function processImage($profile, $image);
     public function updateProfile($user, $request);
     public function updatePassword($user, $request);
-
+    public function resultExamUser($id);
+    public function wordStatusUser();
 }

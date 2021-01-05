@@ -5,6 +5,9 @@ use App\Repositories\BaseRepository;
 use App\Repositories\User\Profile\ProfileRepositoryInterface;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class ProfileRepository extends BaseRepository implements ProfileRepositoryInterface {
 
@@ -73,5 +76,19 @@ class ProfileRepository extends BaseRepository implements ProfileRepositoryInter
             $result = null;
         }
         return $result;
+    }
+
+    public function resultExamUser($id)
+    {
+        $user = Auth::user();
+        $result = User::find($user->id)->lessons()->where('user_id', $user->id)
+                ->where('lesson_id', $id)->first();
+        return $result;
+    }
+
+    public function wordStatusUser()
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        return $user->words;
     }
 }

@@ -53,7 +53,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-info">
+                                <button type="submit" class="btn btn-info" id="btn-login">
                                     @lang('user.login')
                                 </button>
                                 <a href="{{ route('sign-in/social','github') }}" type="button" class="btn btn-success">

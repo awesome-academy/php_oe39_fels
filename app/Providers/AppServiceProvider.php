@@ -17,6 +17,25 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\User\Profile\ProfileRepositoryInterface::class,
             \App\Repositories\User\Profile\ProfileRepository::class,
         );
+        $this->app->singleton(
+            \App\Repositories\User\Course\CourseRepositoryInterface::class,
+            \App\Repositories\User\Course\CourseRepository::class,
+        );
+
+        $this->app->singleton(
+            \App\Repositories\User\Lesson\LessonRepositoryInterface::class,
+            \App\Repositories\User\Lesson\LessonRepository::class,
+        );
+
+        $this->app->singleton(
+            \App\Repositories\User\Answer\AnswerRepositoryInterface::class,
+            \App\Repositories\User\Answer\AnswerRepository::class,
+        );
+
+        $this->app->singleton(
+            \App\Repositories\User\Word\WordRepositoryInterface::class,
+            \App\Repositories\User\Word\WordRepository::class,
+        );
     }
 
     /**

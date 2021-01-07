@@ -39,9 +39,9 @@ Route::group(['middleware' => 'localization'], function () {
     Route::get('/', function () {
         return view('welcome');
     });
-    
+
     Auth::routes();
-    
+
     Route::get('change-language/{language}', 'ChangeLanguageController@changeLanguage')->name('change-language');
 
     Route::get('/profile/{id}', 'UserController@profile')->name('user.profile');
@@ -55,5 +55,11 @@ Route::group(['middleware' => 'localization'], function () {
     Route::group(['middleware' => 'guest'], function () {
         Route::get('/sign-in/{social}', 'Auth\LoginController@socialLogin')->name('sign-in/social');
         Route::get('/sign-in/{social}/redirect', 'Auth\LoginController@socialRedirect')->name('sign-in/social/redirect');
+    });
+
+    Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin-', 'middleware' => 'auth'], function() {
+        Route::get('/', 'DashboardController@index')->name('dashboard');
+
+        Route::get('/course', 'CourseController@index')->name('course');
     });
 });

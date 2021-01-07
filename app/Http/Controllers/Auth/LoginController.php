@@ -52,7 +52,7 @@ class LoginController extends Controller
         $user = Socialite::driver($social)->user();
 
         $name = $user->name ?? $name = $user->nickname;
-       
+
         $user = User::firstOrCreate([
             'email' => $user->email
         ], [
@@ -66,4 +66,18 @@ class LoginController extends Controller
         return redirect('/home');
     }
 
+     /**
+     * Override redirect url
+     */
+    protected function redirectTo()
+    {
+        $roleId = auth()->user()->role_id;
+        $adminRole = [config('constant.role_user.admin'), config('constant.role_user.super_admin')];
+        if (in_array($roleId, $adminRole)) {
+
+            return route('admin-dashboard');
+        }
+
+        return route('home');
+    }
 }
